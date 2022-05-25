@@ -41,6 +41,9 @@ function CreateProductModal(props) {
   const Product = Moralis.Object.extend("Products");
   const prod = new Product();
 
+  const networkId = window.ethereum.networkVersion;
+   
+
   const handleChange = (event) => {
     setCreator(event.target.value);
   };
@@ -205,7 +208,7 @@ function CreateProductModal(props) {
                   fullWidth
                   name="price"
                   type="number"
-                  label="Price (in BOBA Rinkeby)"
+                  label={`Price in ${networkId == 28 && "BOBA Rinkeby" || networkId == 80001 &&  "MATIC" || networkId == 3 && "ETH" || networkId == 97 && "BNB"}`}
                   {...formik.getFieldProps("price")}
                   error={Boolean(formik.touched.price && formik.errors.price)}
                   helperText={formik.touched.price && formik.errors.price}

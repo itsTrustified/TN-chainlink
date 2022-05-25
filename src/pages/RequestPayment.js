@@ -68,7 +68,8 @@ export default function RequestPayment(props) {
               label="Token"
               {...formik.getFieldProps("token")}
             >
-              <MenuItem value="BOBA">BOBA Rinkeby</MenuItem>
+                <MenuItem value="MATIC">MATIC</MenuItem> 
+              <MenuItem value="BSC">BSC</MenuItem>
               <MenuItem value="ETH">ETH</MenuItem> 
             </Select>
           </FormControl>

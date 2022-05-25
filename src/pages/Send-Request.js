@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis, useMoralisCloudFunction, useMoralisWeb3Api } from "react-moralis";
 import { toast } from "react-toastify";
 import Iconify from "src/components/Iconify";
 import { Web3Context } from "src/context/Web3Context";
@@ -27,6 +27,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import SendTable from "src/components/payments/SendTable";
 import RequestTable from "src/components/payments/RequestTable";
+import Web3 from "web3";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -69,6 +70,7 @@ const RootStyle = styled(Page)(({ theme }) => ({
 
 function SendRequest() {
   const { Moralis, account, user } = useMoralis();
+  const Web3Api = useMoralisWeb3Api();
   const web3Context = React.useContext(Web3Context);
   const { connectWallet, web3Auth, address } = web3Context;
 
@@ -85,6 +87,12 @@ function SendRequest() {
   const [isUpdated, setIsUpdated] = useState([]);
   const [balance, setBalance] = useState([]);
 
+  const [bal, setBal] = useState();
+  const [eth, setEth] = useState();
+  const [bsc, setBsc] = useState();
+  const [mtk, setMtk] = useState();
+  const [chain, setChain] = useState([]);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -97,22 +105,32 @@ function SendRequest() {
     setOpen(false);
   };
 
-  const getWalletBalence = () => {
-    (async () => {
-      const provider = new ethers.providers.JsonRpcProvider(
-        `https://twilight-icy-glitter.matic-testnet.quiknode.pro/${process.env.REACT_APP_QUICKNODE_KEY}/`
-      );
-      const bal = await provider.getBalance(
-        user?.attributes.ethAddress,
-        "latest"
-      );
-      console.log(bal, "balance");
-      setBalance(parseFloat(ethers.utils.formatEther(bal)).toFixed(2));
-    })();
+  const getWalletBalence = async () => {
+    const networkId = window.ethereum.networkVersion;
+    setChain(networkId);
+
+    let web3 = new Web3("https://rinkeby.boba.network");
+    let balance = await web3.eth.getBalance(user && user.attributes.ethAddress);
+    setBal(ethers.utils.formatUnits(balance, 18));
+
+    let opt = new Web3(`https://ropsten.infura.io/v3/${process.env.REACT_APP_ROPSTEN_KEY}`);
+    let add = opt.utils.toChecksumAddress(user && user.attributes.ethAddress);
+    let tmetadata = await opt.eth.getBalance(user && user.attributes.ethAddress);
+    setEth(ethers.utils.formatUnits(tmetadata, 18));
+
+    const mtk = { chain: "mumbai", address: user.attributes.ethAddress };
+    const mtkdata = Moralis.Web3.getAllERC20(mtk).then((res) => {
+      setMtk(ethers.utils.formatUnits(res[0].balance, 18));
+    });
+
+    let web = new Web3(`https://data-seed-prebsc-1-s1.binance.org:8545`);
+    let bscdata = await web.eth.getBalance(user && user.attributes.ethAddress);
+    setBsc(ethers.utils.formatUnits(bscdata, 18));
+
   };
 
   useEffect(() => {
-    // getWalletBalence();
+    getWalletBalence();
     setData();
   }, [data, isUpdated, user]);
 
@@ -138,7 +156,7 @@ function SendRequest() {
           (pay.from == user?.attributes.username ||
             pay.to == user?.attributes.username)
       );
-     
+
     setSendData(sended);
     setRequestData(requested);
   }
@@ -178,16 +196,55 @@ function SendRequest() {
           justifyContent="flex-end"
           mb={2}
         >
-          <Button variant="outlined">
-            <img
-              src="/images/logo1.png"
-              width={20}
-              height={20}
-              alt=""
-              style={{ marginRight: "10px" }}
-            />{" "}
-            {balance} MATIC
-          </Button>
+          {
+            chain === 80001 && <Button variant="outlined">
+              <img
+                src="/images/logo1.png"
+                width={20}
+                height={20}
+                alt=""
+                style={{ marginRight: "10px" }}
+              />{" "}
+              {mtk } MATIC
+            </Button>
+          }
+          {
+            chain == 3 && <Button variant="outlined">
+              <img
+                src="/images/eth.png"
+                width={20}
+                height={20}
+                alt=""
+                style={{ marginRight: "10px" }}
+              />{" "}
+              {eth } ETH
+            </Button>
+          }
+
+          {
+            chain == 97 && <Button variant="outlined">
+              <img
+                src="/images/bnb.png"
+                width={20}
+                height={20}
+                alt=""
+                style={{ marginRight: "10px" }}
+              />{" "}
+              {bsc} BNB
+            </Button>
+          }
+          {
+            chain == 28 && <Button variant="outlined">
+              <img
+                src="/images/boba.png"
+                width={20}
+                height={20}
+                alt=""
+                style={{ marginRight: "10px" }}
+              />{" "}
+              {bal } BOBA
+            </Button>
+          }
         </Stack>
 
         <Stack>
