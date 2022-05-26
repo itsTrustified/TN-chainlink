@@ -18,7 +18,7 @@ import TableViewBody from "./TableViewBody";
 import { ethers } from "ethers";
 import CircularProgress from "@mui/material/CircularProgress";
 import { AgreementContractAbi } from "../../contracts/config";
-import { AgreementAddress, AgreementBscAddress, AgreementMumbaiAddress, AgreementRopestenAddress } from "../../contracts/contract";
+import { AgreementAddress, AgreementBscAddress, AgreementMumbaiAddress, AgreementRopestenAddress,AgreementAvaxAddress } from "../../contracts/contract";
 
 function TableView(props) {
   const [contractAddressList, setContractAddressList] = useState(null);
@@ -39,6 +39,8 @@ function TableView(props) {
         contractAddresss = AgreementRopestenAddress;
       } else if (networkId == 28) {
         contractAddresss = AgreementAddress;
+      }  else if (networkId == 43113) {
+        contractAddresss = AgreementAvaxAddress;
       }
 
 

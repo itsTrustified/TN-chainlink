@@ -24,7 +24,7 @@ function TableRowView(props) {
                     Stake Amount
                 </Typography>
                 <Typography gutterBottom variant="body2" color="text.secondary" >
-                    {stakeAmount.toFixed(4)}  ({per}% of {props.amount} {chainId == 28 && "BOBA Rinkeby" || chainId == 80001 &&  "MATIC" || chainId == 3 && "ETH" || chainId == 97 && "BNB"} )
+                    {stakeAmount.toFixed(4)}  ({per}% of {props.amount} {chainId == 28 && "BOBA Rinkeby" || chainId == 80001 &&  "MATIC" || chainId == 3 && "ETH" || chainId == 97 && "BNB" || chainId == 43113 && "AVAX"} )
                 </Typography>
                 <Typography gutterBottom variant="h6" component="h2">
                     Stake

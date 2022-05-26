@@ -175,6 +175,8 @@ function CreateAgreementModal(props) {
                         toast.error("Please connect to the Ropsten Network in Metamask to continue!");
                       } else if (e.target.value == 'Boba' && networkId !== '28') {
                         toast.error("Please connect to the BOBA network in Metamask to continue!");
+                      } else if (e.target.value == 'Avax' && networkId !== '43113') {
+                        toast.error("Please connect to the AVAX FUJI network in Metamask to continue!");
                       }  
                       setChain(e.target.value)
                     }
@@ -184,6 +186,7 @@ function CreateAgreementModal(props) {
                     <MenuItem value="Binance">BSC</MenuItem>
                     <MenuItem value="Polygon">Polygon Mumbai</MenuItem>
                     <MenuItem value="Ropsten">Ropsten</MenuItem>
+                    <MenuItem value="Avax">Avalanche FUJI</MenuItem>
                   </Select>
                 </FormControl>
               </Box>
@@ -249,7 +252,8 @@ function CreateAgreementModal(props) {
                 label={chain === 'Boba' && "Price (in BOBA Rinkeby)" ||
                  chain === 'Binance' &&  "Price (in BNB)" ||
                  chain === 'Polygon' &&  "Price (in MATIC)" ||
-                 chain === 'Ropsten' &&  "Price (in ETH)"
+                 chain === 'Ropsten' &&  "Price (in ETH)" ||
+                 chain === '' &&  "Price" 
                  }  
                 //   required
                 // onChange={priceHandler}

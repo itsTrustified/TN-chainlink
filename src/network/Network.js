@@ -50,3 +50,17 @@ const BSC = {
     blockExplorerUrls: ["https://testnet.bscscan.com"],
 } 
 export { BSC };
+
+const AVAX = {
+    chainId: "0xa869",
+    chainName: "avalanche",
+    rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+    nativeCurrency: {
+        name: "AVAX FUJI",
+        symbol: "AVAX",
+        decimals: 18,
+    },
+    blockExplorerUrls: ["https://testnet.snowtrace.io"],
+} 
+export { AVAX };
+ 

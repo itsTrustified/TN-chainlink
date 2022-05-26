@@ -24,7 +24,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { ethers } from "ethers";
-import { BOBA,POLYGON,Ropsten,BSC } from "../../network/Network";
+import { BOBA,POLYGON,Ropsten,BSC, AVAX } from "../../network/Network";
 import { AgreementAbi } from "../../contracts/config";
 import Label from "../Label";
 import TableRowView from "./TableRowView";
@@ -102,7 +102,7 @@ function TableViewBody(props) {
       await txn.wait();
       const data = {
         to: props.currentAccount,
-        message: `You stacked ${stake} BOBA Rinkeby Successfully!`,
+        message: `You stacked ${stake} Successfully!`,
       };
       await sendNotifications(data);
       toast.success("Successfully stake amount!", { position: "bottom-right" });
@@ -266,7 +266,7 @@ function TableViewBody(props) {
           </TableCell>
           <TableCell>
             <a
-              href={`${chainId == 28 && BOBA.blockExplorerUrls[0] || chainId == 80001 &&  POLYGON.blockExplorerUrls[0] || chainId == 3 && Ropsten.blockExplorerUrls[0] || chainId == 97 && BSC.blockExplorerUrls[0]}/address/${contractState.address}`}
+              href={`${chainId == 28 && BOBA.blockExplorerUrls[0] || chainId == 80001 &&  POLYGON.blockExplorerUrls[0] || chainId == 3 && Ropsten.blockExplorerUrls[0] || chainId == 97 && BSC.blockExplorerUrls[0]  || chainId == 43113 && AVAX.blockExplorerUrls[0]}/address/${contractState.address}`}
               target="_blank"
               rel="noreferrer"
             >
@@ -289,7 +289,7 @@ function TableViewBody(props) {
                     {contractState.description}
                   </Typography>
                   <Typography variant="h6" gutterBottom component="h2">
-                    Total Amount: {contractState.price} {chainId == 28 && "BOBA Rinkeby" || chainId == 80001 &&  "MATIC" || chainId == 3 && "ETH" || chainId == 97 && "BNB"} 
+                    Total Amount: {contractState.price} {chainId == 28 && "BOBA Rinkeby" || chainId == 80001 &&  "MATIC" || chainId == 3 && "ETH" || chainId == 97 && "BNB" || chainId == 43113 && "AVAX"} 
                   </Typography>
                 </Stack>
                 <Stack

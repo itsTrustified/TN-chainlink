@@ -23,7 +23,7 @@ import { AgreementContractAbi, biconomyAddress } from "src/contracts/config";
 import CreateAgreementModal from "src/modal/CreateAgreementModal";
 import Page from "../components/Page";
 import Web3 from "web3";
-import { AgreementAddress ,AgreementBscAddress,AgreementMumbaiAddress,AgreementRopestenAddress} from "src/contracts/contract";
+import { AgreementAddress ,AgreementBscAddress,AgreementMumbaiAddress,AgreementRopestenAddress,AgreementAvaxAddress} from "src/contracts/contract";
 
 function Agreement() {
   const { Moralis, account, user } = useMoralis();
@@ -63,6 +63,8 @@ function Agreement() {
       contractAddresss =AgreementRopestenAddress;
      } else if(data.chain == "Boba") {
       contractAddresss = AgreementAddress;
+     } else if(data.chain == "Avax") {
+      contractAddresss = AgreementAvaxAddress;
      }
  
 

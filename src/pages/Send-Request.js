@@ -91,6 +91,7 @@ function SendRequest() {
   const [eth, setEth] = useState();
   const [bsc, setBsc] = useState();
   const [mtk, setMtk] = useState();
+  const [avax, setAvax] = useState();
   const [chain, setChain] = useState([]);
 
   const handleChange = (event, newValue) => {
@@ -127,6 +128,9 @@ function SendRequest() {
     let bscdata = await web.eth.getBalance(user && user.attributes.ethAddress);
     setBsc(ethers.utils.formatUnits(bscdata, 18));
 
+    let options = new Web3(`https://api.avax-test.network/ext/bc/C/rpc`);
+    let tokenMetadata = await options.eth.getBalance(user && user.attributes.ethAddress);
+    setAvax(ethers.utils.formatUnits(tokenMetadata, 18)); 
   };
 
   useEffect(() => {
@@ -205,7 +209,7 @@ function SendRequest() {
                 alt=""
                 style={{ marginRight: "10px" }}
               />{" "}
-              {mtk } MATIC
+              {mtk} MATIC
             </Button>
           }
           {
@@ -217,7 +221,7 @@ function SendRequest() {
                 alt=""
                 style={{ marginRight: "10px" }}
               />{" "}
-              {eth } ETH
+              {eth} ETH
             </Button>
           }
 
@@ -242,7 +246,20 @@ function SendRequest() {
                 alt=""
                 style={{ marginRight: "10px" }}
               />{" "}
-              {bal } BOBA
+              {bal} BOBA
+            </Button>
+          }
+
+          {
+            chain == 43113 && <Button variant="outlined">
+              <img
+                src="/images/avax.png"
+                width={20}
+                height={20}
+                alt=""
+                style={{ marginRight: "10px" }}
+              />{" "}
+              {avax} AVAX
             </Button>
           }
         </Stack>

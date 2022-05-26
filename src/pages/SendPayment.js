@@ -110,6 +110,7 @@ export default function SendPayment(props) {
               <MenuItem value="MATIC">MATIC</MenuItem> 
               <MenuItem value="BSC">BSC</MenuItem>
               <MenuItem value="ETH">ETH</MenuItem> 
+              <MenuItem value="AVAX">AVAX</MenuItem> 
             </Select>
           </FormControl>
         </Box>

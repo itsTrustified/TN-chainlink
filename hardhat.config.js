@@ -31,6 +31,12 @@ module.exports = {
       gasPrice: 20000000000,
       accounts:[privateKey]
     },
+    avalancheTest: {
+      url: 'https://api.avax-test.network/ext/bc/C/rpc',
+      gasPrice: 225000000000,
+      chainId: 43113,
+      accounts:[privateKey],
+    },
   },
 
   solidity: {

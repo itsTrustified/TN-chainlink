@@ -323,9 +323,9 @@ function CreateInvoiceModal(props) {
                         }}
                       >
                         <MenuItem value="ETH">ETH</MenuItem>
-                        <MenuItem value="BOBA">BOBA Rinkeby</MenuItem>
-                        <MenuItem value="USDT">USDT</MenuItem>
-                        <MenuItem value="USDC">USDC</MenuItem>
+                        <MenuItem value="MATIC">MATIC</MenuItem>
+                        <MenuItem value="AVAX">AVAX</MenuItem>
+                        <MenuItem value="BSC">BNB</MenuItem> 
                       </Select>
                     </FormControl>
                     {(selectedToken == "MATIC" || selectedToken == "ETH") && (
@@ -350,6 +350,8 @@ function CreateInvoiceModal(props) {
                       >
                         <MenuItem value="ethereum">Ethereum</MenuItem>
                         <MenuItem value="polygon">Polygon</MenuItem>
+                        <MenuItem value="binance">Bsc</MenuItem>
+                        <MenuItem value="avalanche">Avalanche</MenuItem> 
                       </Select>
                     </FormControl>
                   </Grid>

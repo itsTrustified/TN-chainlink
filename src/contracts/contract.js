@@ -5,6 +5,7 @@ const AgreementAddress = "0x30393dFc041aE17ceD39522c6Ce2f125D31667CF";
 const AgreementBscAddress="0x85B6eE037A8E183C502E8Ff17FcC069dd4D5712E";
 const AgreementRopestenAddress="0x85B6eE037A8E183C502E8Ff17FcC069dd4D5712E";
 const AgreementMumbaiAddress="0xA3d54Ebb4cDeDb9C35d53a119fce7D707E2853F0"; 
+const AgreementAvaxAddress="0x85B6eE037A8E183C502E8Ff17FcC069dd4D5712E";
 
 const biconomyAddress = "0x47829D7029Ab79382213d0d60B79A647bAEcd166";
 const AgreementContractAbi = AgreementContract.abi;
@@ -19,6 +20,7 @@ export {
   AgreementBscAddress,
   AgreementRopestenAddress,
   AgreementMumbaiAddress,
+  AgreementAvaxAddress,
   AgreementContractAbi,
   AgreementAbi,
   biconomyAddress,
