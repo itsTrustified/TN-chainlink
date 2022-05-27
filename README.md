@@ -72,9 +72,52 @@ module.exports = {
 # contract Address
 
 **Polygon Address** : 0xA3d54Ebb4cDeDb9C35d53a119fce7D707E2853F0
+
 **BSC Address** : 0x85B6eE037A8E183C502E8Ff17FcC069dd4D5712E
+
 **Avalanche Address** : 0x85B6eE037A8E183C502E8Ff17FcC069dd4D5712E
+
 **Ropsten Address** : 0x85B6eE037A8E183C502E8Ff17FcC069dd4D5712E
+
+**Chainlink** : We have used Chainlink 1) Price Feed 2) Chainlink VRF
+```javascript
+
+ window.ethereum.enable();
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  const priceFeed = new ethers.Contract(
+    chainLinkPriceFeed,
+    chainlinkABI,
+    signer
+  );
+  const randomNumberCon = new ethers.Contract(
+    RandomNumberGeneratorContract,
+    chainlinkVRFABI.abi,
+    signer
+  );
+
+ await randomNumberCon.getRandomNumber(1000);
+        const randNo = await randomNumberCon.getRandom();
+        setLoading(true);
+        const formData = {
+          invoiceNumber: parseInt(randNo._hex, 16),
+          created: values.cdate,
+          dueDate: values.ddate,
+          description: values.description,
+          quantity: values.quantity,
+          price: values.price,
+          token: selectedToken,
+          network: values.network,
+          name: values.name,
+          address: values.address,
+          taxName: values.taxName,
+          taxPercentage: values.taxPercentage,
+          note: values.note,
+        };
+        const files = makeFileObjects(formData);
+        await storage(files, formData);
+
+```
 
 # Homepage
 ![Screenshot 2022-05-28 at 12 28 50 AM](https://user-images.githubusercontent.com/45895007/170774584-6ddd4ecb-f1e0-4103-b022-e1adb94be905.png)
