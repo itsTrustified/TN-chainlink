@@ -35,7 +35,12 @@ const sidebarConfig = [
     title: "Analytics",
     path: "/dashboard/app",
     icon: getIcon("eva:pie-chart-2-fill"),
+  },
+  {
+    title: "Product Integration",
+    path: "/dashboard/product-integration",
+    icon: getIcon("eva:shopping-bag-fill"),
   },  
-];
+]; 
 
 export default sidebarConfig;

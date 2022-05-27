@@ -24,6 +24,7 @@ import { element } from "prop-types";
 import InvoiceDetail from "./pages/InvoiceDetail";
 import Subscription from "./pages/Subscribtion";
 import SubscribtionDetails from "./pages/SubscribtionDetails";
+import ProductIntegration from "./pages/ProductIntegration";
 
 // ----------------------------------------------------------------------
 
@@ -43,6 +44,7 @@ export default function Router() {
         { path: "chat", element: <ChatBox /> },
         { path: "userProfile", element: <UserProfile /> },
         { path: "invoice", element: <Invoice /> },
+        { path: "product-integration", element: <ProductIntegration /> },
         { path: "subscriptions", element: <Subscription /> },
       ],
     }, 
