@@ -14,6 +14,7 @@ import { Web3ContextProvider } from "./context/Web3Context";
 import { SuperfluidWeb3ContextProvider } from "./context/SuperfluidContext";
 import { TransakWeb3ContextWeb3ContextProvider } from "./context/Transak";
 import { Web3ModalContextProvider } from "./context/Web3Modal";
+import { AgreementContextProvider  } from "./context/AgreementContext";
 import { NotificationContextProvider } from "./context/Notification";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,17 +30,20 @@ ReactDOM.render(
           appId={process.env.REACT_APP_MORALIS_KEY}
           serverUrl={process.env.REACT_APP_MORALIS_SERVER}
         >
+           <NotificationContextProvider>
+          <AgreementContextProvider>
           <Web3ModalContextProvider>
-            <NotificationContextProvider>
+           
               <Web3ContextProvider>
                 <SuperfluidWeb3ContextProvider>
                   <TransakWeb3ContextWeb3ContextProvider>
                     <App />
                   </TransakWeb3ContextWeb3ContextProvider>
                 </SuperfluidWeb3ContextProvider>
-              </Web3ContextProvider>
-            </NotificationContextProvider>
+              </Web3ContextProvider> 
           </Web3ModalContextProvider>
+          </AgreementContextProvider>
+          </NotificationContextProvider>
         </MoralisProvider>
       </BrowserRouter>
     </Provider>

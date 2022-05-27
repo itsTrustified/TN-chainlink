@@ -22,8 +22,10 @@ import { NotificationContext } from "src/context/Notification";
 import { AgreementContractAbi, biconomyAddress } from "src/contracts/config";
 import CreateAgreementModal from "src/modal/CreateAgreementModal";
 import Page from "../components/Page";
-import Web3 from "web3";
+import Web3 from "web3"; 
 import { AgreementAddress ,AgreementBscAddress,AgreementMumbaiAddress,AgreementRopestenAddress,AgreementAvaxAddress} from "src/contracts/contract";
+import HorizontalLinearStepper from "src/modal/AgreementStepper";
+  
 
 function Agreement() {
   const { Moralis, account, user } = useMoralis();
@@ -109,15 +111,17 @@ function Agreement() {
 
   return (
     <Page title="Agreement |  Trustified Network">
-      <CreateAgreementModal
+      {/* <CreateAgreementModal
         submitForm={createAgreement}
         open={handleClickOpen}
         close={handleClose}
         op={open}
         acc={user && user.attributes.ethAddress}
         loading={loading}
-      />
+      /> */} 
+      
       <Container pl={0} pr={0}>
+      
         <Stack
           direction="row"
           alignItems="center"
@@ -127,22 +131,23 @@ function Agreement() {
           <Typography variant="h4" gutterBottom>
             Agreements
           </Typography>
-          <Button
+          {/* <Button
             variant="contained"
             onClick={handleClickOpen}
             to="#"
             startIcon={<Iconify icon="eva:plus-fill" />}
           >
             Create Agreement
-          </Button>
-        </Stack>
+          </Button> */}
+          <HorizontalLinearStepper/>
+        </Stack> 
 
         <Stack sx={{ marginTop: '30px' }}>
           <Card>
             <TableView currentAccount={user && user.attributes.ethAddress} />
           </Card>
-        </Stack>
-      </Container>
+        </Stack> 
+      </Container> 
     </Page>
   );
 }
