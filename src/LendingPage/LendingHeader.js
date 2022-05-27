@@ -96,8 +96,7 @@ export default function LendingHeader() {
               Escrow Agreement
             </Button> */}
 
-            {user == null ? (
-              <>
+            {user == null ? ( 
                 <Button
                   variant="contained"
                   onClick={async () => {
@@ -109,21 +108,7 @@ export default function LendingHeader() {
                   }}
                 >
                   Connect
-                </Button>
-                &nbsp;
-                <Button
-                  variant="contained"
-                  onClick={async () => {
-                    try {
-                      await getVerified();
-                    } catch (error) {
-                      console.log(error);
-                    }
-                  }}
-                >
-                  Get Verified
-                </Button>
-              </>
+                </Button> 
             ) : (
               <> 
                 <Button onClick={() => dashboard()}>Dashboard</Button>

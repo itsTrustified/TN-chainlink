@@ -22,10 +22,14 @@ import InvoicingRoot from "./InvoicingRoot";
 import AnalyticsRoot from "./AnalyticsRoot";
 
 import Slider from "./Slider";
+import { Web3ModalContext } from "src/context/Web3Modal";
 
 // import SliderExample from './slider'
 
 export default function Lending() {
+  const web3ModalContext = React.useContext(Web3ModalContext);
+  const { connectWallet, account } = web3ModalContext;
+
   const RootStyle = styled(Card)(({ theme }) => ({
     boxShadow: "none",
     border: "none",
@@ -53,23 +57,28 @@ export default function Lending() {
     <Fragment>
       <div className="container-fluid p-5">
         <div className="row">
-          <div className="col-8 mx-auto mt-5">
-            <p className="peragraph">Decentralized Freelancing Platform</p>
-            {/*    . */}
-            <p className="peragraph">
-              {" "}
-              for
-              <span
-                style={{
-                  color: " black",
-                }}
-              >
-                {" "}
-                Global Gig Economy
-              </span>{" "}
-              {/* platform */}
+          <div className="col-10 mx-auto text-center mt-5">
+            <p className="peragraph">Sell Digital Services Globally.</p> 
+            <p className="peragraph"> 
+                Accept Crypto Payments without paying Hefty Commissions. 
             </p>
-          </div>
+
+            <h4 className="mt-5 text-center mb-5">Decentralised Escrow, Subscription Payment, Fiat On Ramp, Invoicing.</h4>
+                  <Button
+                  className="text-center"
+                  variant="contained"
+                  style={{padding:'10px 20px'}}
+                  onClick={async () => {
+                    try {
+                      await connectWallet();
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  }}
+                >
+                  Get Started
+                </Button> 
+          </div> 
         </div>
       </div>
 
@@ -278,74 +287,6 @@ export default function Lending() {
         </div>
       </div>
     </Fragment>
-
-    //           <div className="col-md-4 mt-4">
-    //             <div className="cardtrust">
-    //               <h4 className="build-title"> Individuals </h4>
-    //               <p className="p-y-1  trust-p">
-    //                 Create profile, add services like software development,
-    //                 accounts, finance, digital marketing as per your expertise.
-    //                 <p style={{ paddingTop: "40px" }}>
-    //                   Add Products from physical goods, digital products such as
-    //                   themes, plugins, templates, growth hack guide, booklets and so
-    //                   on.
-    //                 </p>
-    //               </p>
-    //             </div>
-    //           </div>
-    //           <div className="col-md-4 mt-4">
-    //             <div className="cardtrust">
-    //               <h4 className="build-title"> Businesses</h4>
-    //               <p className="p-y-1 trust-p fw-normal">
-    //                 Sell products/services globally. Create agreement with scope of
-    //                 work, delivery time frame and pricing.
-    //                 <p style={{ paddingTop: "40px" }}>
-    //                   Let smart contract ensure trust and ethical behaviour of
-    //                   parties involved in transaction.
-    //                 </p>
-    //               </p>
-    //             </div>
-    //           </div>
-    //           <div className="col-md-4 mt-4 ">
-    //             <div className="cardtrust">
-    //               <h4 className="build-title">Product Integrations</h4>
-    //               <p className="p-y-1  trust-p">
-    //                 Developers can easily integrate agreement and crypto payment
-    //                 service in web and mobile app using Trustified SDK.
-    //               </p>
-    //             </div>
-    //           </div>
-    //           <div className="col-md-4 d-flex justify-content-center">
-    //             <div className="cardtrust"  >
-    //               <h4 className="trust-title"> Fast & Secure</h4>
-    //               <p className="p-y-1  trust-p">
-    //                 Security of Ethereum network, Speed and Economic transactions of
-    //                 Polygon)
-    //               </p>
-    //             </div>
-    //           </div>
-    //           <div className="col-md-4 d-flex justify-content-center">
-    //             <div className="cardtrust"  >
-    //               <h4 className="trust-title"> No Hefty Commissions</h4>
-    //               <p className="p-y-1  trust-p">
-    //               Trust is ensured by code. Increase
-    //   profit margins without giving hefty
-    //   commissions to third parties.
-    //               </p>
-    //             </div>
-    //           </div>
-    //           <div className="col-md-4 d-flex justify-content-center">
-    //             <div className="cardtrust"  >
-    //               <h4 className="trust-title"> Scale across the Globe</h4>
-    //               <p className="p-y-1  trust-p">
-    //               Showcase your work globally and
-    // Send/Receive crypto payment easily
-    // without any boundaries.
-    //               </p>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
+ 
   );
 }

@@ -8,6 +8,7 @@ import Iconify from "../../../components/Iconify";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import { useEffect, useState } from "react";
 import { AgreementAddress } from "../../../contracts/config";
+import { AgreementAvaxAddress, AgreementBscAddress, AgreementMumbaiAddress, AgreementRopestenAddress } from "src/contracts/contract";
 
 // ----------------------------------------------------------------------
 
@@ -53,14 +54,38 @@ export default function AppTotalAgreement() {
           e.seller === user?.attributes.ethAddress
       );
 
-    if (filterUsr != null) setAgree(filterUsr.length);
+    // if (filterUsr != null) setAgree(filterUsr.length);
   });
 
   useEffect(async () => {
-    const data = await Moralis.Plugins.covalent?.getLogEventsByContractAddress({
-      chainId: 80001,
-      contractAddress: AgreementAddress,
-    });
+
+    const networkId = window.ethereum.networkVersion;
+
+      let contractAddresss;
+      if (networkId == 97) {
+        contractAddresss = AgreementBscAddress;
+      } else if (networkId == 80001) {
+        contractAddresss = AgreementMumbaiAddress;
+      } else if (networkId == 3) {
+        contractAddresss = AgreementRopestenAddress;
+      } else if (networkId == 28) {
+        contractAddresss = AgreementAddress;
+      }  else if (networkId == 43113) {
+        contractAddresss = AgreementAvaxAddress;
+      } 
+
+      const pBlock = "26456572";
+      const aBlock ="";
+      const rBlock = "";
+      const bBlock = "";
+
+    const logs = await Moralis.Plugins.covalent?.getLogEventsByContractAddress({
+      chainId: networkId,
+      contractAddress: contractAddresss,
+      startingBlock:  networkId == 80001 && pBlock  || networkId == 3 && rBlock  || networkId == 97 && bBlock  || networkId == 43113 && aBlock ,
+      endingBlock: networkId == 80001 && pBlock  || networkId == 3 && rBlock  || networkId == 97 && bBlock  || networkId == 43113 && aBlock ,
+    }); 
+       setAgree(logs.data.items.length); 
   }, []);
 
   return (

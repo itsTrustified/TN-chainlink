@@ -5,6 +5,9 @@ import { Card, Typography } from '@mui/material';
 import { fShortenNumber } from '../../../utils/formatNumber';
 // component
 import Iconify from '../../../components/Iconify';
+import { useMoralis } from 'react-moralis';
+import { useEffect, useState } from 'react';
+import { AgreementAvaxAddress, AgreementBscAddress, AgreementMumbaiAddress, AgreementRopestenAddress } from "src/contracts/contract";
 
 // ----------------------------------------------------------------------
 
@@ -36,14 +39,28 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 const TOTAL = 1352831;
 
 export default function AppNewUsers() {
+  const { Moralis, user } = useMoralis();
+  const [agree, setAgree] = useState();
+
+  useEffect(async () => {
+
+    const networkId = window.ethereum.networkVersion; 
+    const data = await Moralis.Plugins.covalent?.getTransactionsForAddress({
+        chainId: networkId,
+        address: user && user.attributes.ethAddress,
+
+       }); 
+       setAgree(data.data.items.length); 
+  }, []);
+
   return (
     <RootStyle>
       <IconWrapperStyle>
         <Iconify icon="ant-design:transaction-outlined" width={24} height={24} />
       </IconWrapperStyle>
-      <Typography variant="h3"  color="#000">{fShortenNumber(20)}</Typography>
+      <Typography variant="h3"  color="#000">{fShortenNumber(agree)}</Typography>
       <Typography variant="subtitle2" color="#000" sx={{ opacity: 0.72 }}>
-       Crypto Transactions
+         Crypto Transactions
       </Typography>
     </RootStyle>
   );

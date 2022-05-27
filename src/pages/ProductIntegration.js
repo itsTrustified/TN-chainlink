@@ -15,10 +15,8 @@ const RootStyle = styled(Card)(({ theme }) => ({
     color: theme.palette.primary.main,
 }));
 
-const code = `<a href="https://cointopper.com/ico/crystals" 
-target="_blank" rel="nofollow" title="CRYSTALS">
-<img border="0" src="https://cointopper.com/uploads/badge/crystals.png"
-alt="CRYSTALS"/></a>
+const code = `<a href="http://trustified.network/Test1/product%201" 
+target="_blank" rel="nofollow" title="trustifiednetwork"></a>
 `
 
 const IconWrapperStyle = styled("div")(({ theme }) => ({
